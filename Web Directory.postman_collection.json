@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "39cac22e-fb19-43af-8400-8facaee9b512",
+		"name": "Web Directory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1526637",
+		"_collection_link": "https://vrd-dev-team.postman.co/workspace/My-Collections~ab7de8ac-1b48-424b-8c7e-98b287015148/collection/1526637-39cac22e-fb19-43af-8400-8facaee9b512?action=share&source=collection_link&creator=1526637"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const tokenVal = pm.response.json().access_token;",
+							"pm.environment.set('API_TOKEN', tokenVal);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "admin@admin.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "test1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://web-directory.loc/api/login",
+					"protocol": "http",
+					"host": [
+						"web-directory",
+						"loc"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "admin@user.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "test1234",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "User 1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://web-directory.loc/api/register",
+					"protocol": "http",
+					"host": [
+						"web-directory",
+						"loc"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{API_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://web-directory.loc/api/logout",
+					"protocol": "http",
+					"host": [
+						"web-directory",
+						"loc"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Info",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{API_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://web-directory.loc/api/user",
+					"protocol": "http",
+					"host": [
+						"web-directory",
+						"loc"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Websites Lists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://web-directory.loc/api/websites",
+					"protocol": "http",
+					"host": [
+						"web-directory",
+						"loc"
+					],
+					"path": [
+						"api",
+						"websites"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "hello",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store website",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{API_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Hello Website",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "http://hello.loc",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Hello to the future",
+							"type": "text"
+						},
+						{
+							"key": "category_ids[]",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "category_ids[]",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "category_ids[]",
+							"value": "7",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://web-directory.loc/api/websites",
+					"protocol": "http",
+					"host": [
+						"web-directory",
+						"loc"
+					],
+					"path": [
+						"api",
+						"websites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Website",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{API_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_method",
+							"value": "delete",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://web-directory.loc/api/websites/23",
+					"protocol": "http",
+					"host": [
+						"web-directory",
+						"loc"
+					],
+					"path": [
+						"api",
+						"websites",
+						"23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vote To Wesbite",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{API_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "vote",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://web-directory.loc/api/websites/24/vote",
+					"protocol": "http",
+					"host": [
+						"web-directory",
+						"loc"
+					],
+					"path": [
+						"api",
+						"websites",
+						"24",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
